@@ -1,0 +1,11 @@
+package: github.com/gettyimages/chronos_exporter
+import:
+- package: github.com/jeffail/gabs
+  version: ~1.0.0
+- package: github.com/prometheus/client_golang
+  version: ~0.8.0
+  subpackages:
+  - prometheus
+- package: github.com/prometheus/common
+  subpackages:
+  - log

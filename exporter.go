@@ -90,17 +90,6 @@ func (e *Exporter) scrapeMetrics(json *gabs.Container, ch chan<- prometheus.Metr
 		case "message":
 			log.Errorf("Problem collecting metrics: %s\n", element.Data().(string))
 			return
-		case "version":
-			data := element.Data()
-			version, ok := data.(string)
-			if !ok {
-				log.Errorf(fmt.Sprintf("Bad conversion! Unexpected value \"%v\" for version\n", data))
-			} else {
-				gauge, _ := e.Gauges.Fetch("metrics_version", "Chronos metrics version", "version")
-				gauge.WithLabelValues(version).Set(1)
-				gauge.Collect(ch)
-			}
-
 		case "counters":
 			e.scrapeCounters(element)
 		case "gauges":

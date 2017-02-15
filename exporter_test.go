@@ -46,19 +46,6 @@ func export(json string) ([]byte, error) {
 	return body, nil
 }
 
-func Test_export_version(t *testing.T) {
-	results, err := export(`{
-		"version": "3.0.0"
-	}`)
-
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	if line := `chronos_metrics_version{version="3.0.0"} 1`; !strings.Contains(string(results), line) {
-		t.Errorf("No metric matching: %s\n", line)
-	}
-}
 
 func Test_export_counters(t *testing.T) {
 	results, err := export(`{
